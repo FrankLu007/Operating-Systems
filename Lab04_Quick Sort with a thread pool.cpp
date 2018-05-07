@@ -64,21 +64,21 @@ int main()
 	for(int i = 0 ; i < N ; i++) fin >> num[i];
 	fin.close();
 
-    for(int i = 0 ; i < 15 ; i++) sem_init(&sem[i], 0, 0);
+        for(int i = 0 ; i < 15 ; i++) sem_init(&sem[i], 0, 0);
 	sem_init(&mutex, 0, 1);
 	sem_init(&mutex_cnt, 0, 1);
 	sem_init(&work, 0, 0);
-    sem_init(&finish, 0, 0);
+        sem_init(&finish, 0, 0);
 
-    l[0] = 0;
-    r[0] = N-1;
-    for(int j = 0 ; j < 8 ; j++) pthread_create(&thread[j], NULL, q_sort, NULL);
+    	l[0] = 0;
+    	r[0] = N-1;
+    	for(int j = 0 ; j < 8 ; j++) pthread_create(&thread[j], NULL, q_sort, NULL);
 
-    job = 0;
+    	job = 0;
 	for(int i = 0 ; i < 8 ; i++)
 	{
 		for(int j = 0 ; j < N ; j++) sample[j] = num[j];
-        cnt = 0;
+        	cnt = 0;
 		sem_post(&work);
 
 		gettimeofday(&start, 0);
@@ -87,8 +87,8 @@ int main()
 		gettimeofday(&End, 0);
 
 		sec = End.tv_sec - start.tv_sec;
-    	usec = End.tv_usec - start.tv_usec;
-    	cout << "Elapsed time of " << i+1 << " thread(s): " << fixed << setprecision(3) << sec + (usec / 1000000.0) << " sec\n";
+    		usec = End.tv_usec - start.tv_usec;
+    		cout << "Elapsed time of " << i+1 << " thread(s): " << fixed << setprecision(3) << sec + (usec / 1000000.0) << " sec\n";
 
 		filename = "output_" + to_string(i+1) + ".txt";
 		fout.open(filename.c_str());
